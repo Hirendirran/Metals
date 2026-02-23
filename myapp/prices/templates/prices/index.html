@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Daily Metal Tracking Prices</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(180deg, #efefef, #f9f9f9);
+            margin: 0;
+            padding: 30px 0;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .controls {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        input[type="date"] {
+            padding: 8px 10px;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 8px 14px;
+            margin-left: 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* ✅ MAIN GRID */
+        .cards {
+            width: 1100px;              /* FIXED WIDTH like screenshot */
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
+            gap: 25px;
+        }
+
+        .card {
+            background: #f2f2f2;
+            border-radius: 18px;
+            padding: 22px;
+            height: 230px;             /* SAME HEIGHT for all cards */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .metal {
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-size: 17px;
+        }
+
+        .price {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .unit {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .divider {
+            height: 1px;
+            background: #dcdcdc;
+            margin: 12px 0;
+        }
+
+        .meta {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .error {
+            text-align: center;
+            color: red;
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 13px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Daily Metal Tracking Prices</h2>
+
+<div class="controls">
+    <input type="date" id="datePicker">
+    <button onclick="getPrices()">Check Price</button>
+</div>
+
+<div id="error" class="error"></div>
+
+<div class="cards" id="output"></div>
+
+<footer>
+    © Precious Metal Price Tracker
+</footer>
+
+<script>
+function getPrices() {
+    const date = document.getElementById("datePicker").value;
+    const output = document.getElementById("output");
+    const errorBox = document.getElementById("error");
+
+    output.innerHTML = "";
+    errorBox.innerHTML = "";
+
+    if (!date) {
+        errorBox.innerHTML = "Please select a date";
+        return;
+    }
+
+    console.log("Selected date:", date);
+
+    fetch(`/api/prices/${date}/`)
+        .then(res => res.json())
+        .then(data => {
+            console.log("API response:", data);
+
+            if (data.error) {
+                errorBox.innerHTML = data.error;
+                return;
+            }
+
+            const metals = [
+                { name: "GOLD", value: data.gold, unit: "Per Gram" },
+                { name: "PLATINUM", value: data.platinum, unit: "Per Gram" },
+                { name: "SILVER", value: data.silver, unit: "Per Gram" },
+                { name: "DIAMOND", value: data.diamond, unit: "Per Carat" }
+            ];
+
+            metals.forEach(metal => {
+                output.innerHTML += `
+                    <div class="card">
+                        <div>
+                            <div class="metal">${metal.name}</div>
+                            <div class="price">₹ ${metal.value}</div>
+                            <div class="unit">${metal.unit}</div>
+                        </div>
+
+                        <div>
+                            <div class="divider"></div>
+                        </div>
+                    </div>
+                `;
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            errorBox.innerHTML = "Server error. Check console.";
+        });
+}
+</script>
+
+
+</body>
+</html>
