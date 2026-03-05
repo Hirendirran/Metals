@@ -1,132 +1,91 @@
-# 💰 Metal Rate Tracker
+# 🪙 MetalRate Tracker
 
-A **Django-based web application** that displays historical and date-wise prices of precious metals through a responsive dashboard and calendar interface.
-The system allows users to easily view and analyze metal price trends over time.
+**MetalRate Tracker** is a Django-based web application that allows users to view **historical and date-wise prices** of precious metals such as **Gold, Silver, Platinum, and Diamond**.  
+The application uses a **calendar-based date selector**, **REST-style APIs**, and a **clean card-based UI** to efficiently fetch and visualize metal price data.
 
-This project demonstrates **backend development, REST API design, database handling, and responsive UI development** using Django and modern web technologies.
+---
+
+## 📌 Project Overview
+
+MetalRate Tracker helps users quickly check metal prices for a selected date.  
+It is designed to handle **large datasets (10+ years of data)** and presents the information in a simple, user-friendly dashboard.
 
 ---
 
 ## 🚀 Features
 
-* 📅 View **date-wise historical metal prices**
-* 📊 Interactive and responsive dashboard
-* ⚡ Fast data retrieval using **RESTful APIs**
-* 🗄 Efficient handling of large datasets with **Django ORM optimization**
-* 📱 Responsive interface for desktop and mobile devices
+- 📅 **Date-wise metal price lookup**
+- 🪙 **Supports Gold, Silver, Platinum, and Diamond**
+- 📊 **Efficient handling of large datasets (10+ years)**
+- ⚡ **REST-style backend APIs**
+- 🎨 **Clean, responsive card-based dashboard UI**
+- ❌ **Graceful handling of missing dates**
+- 🗄 **SQLite database with indexed date field**
 
 ---
 
 ## 🛠 Tech Stack
 
-**Backend**
+### Backend
+- Python  
+- Django  
+- Django ORM  
+- SQLite  
 
-* Python
-* Django
-
-**Database**
-
-* SQLite
-
-**Frontend**
-
-* HTML
-* CSS
-* JavaScript
-
-**Tools**
-
-* VS Code
-* PyCharm
+### Frontend
+- HTML  
+- CSS (Grid & Card Layout)  
+- JavaScript (Fetch API)  
 
 ---
 
 ## 📂 Project Structure
 
-```id="metaltrackerstruct"
-Metal-Rate-Tracker/
-│
-├── metaltracker/        # Django project configuration
-├── tracker/             # Main application
-│
-├── templates/           # HTML templates
-├── static/              # CSS, JavaScript, images
-│
-├── db.sqlite3           # Database
-├── manage.py            # Django management script
-└── README.md            # Project documentation
-```
+text
+MetalRate-Tracker/
+├── Trade/
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   └── migrations/
+├── Templates/
+│   └── Trade/
+│       └── home.html
+├── static/
+├── db.sqlite3
+├── manage.py
+└── README.md
 
----
+⚙️ Setup Instructions
 
-## ⚙️ Key Implementations
+Clone the repository
 
-* Developed **RESTful APIs** to retrieve and serve historical metal price data efficiently.
-* Built a **responsive user interface** using HTML, CSS, and JavaScript.
-* Implemented **Django ORM query optimization** to improve performance when handling large datasets.
-* Designed a **calendar-based UI** to allow users to quickly access metal prices for specific dates.
+git clone https://github.com/your-username/MetalRate-Tracker.git
+cd MetalRate-Tracker
 
----
+Create and activate virtual environment
 
-## ▶️ How to Run the Project
+python -m venv venv
+venv\Scripts\activate   # Windows
+source venv/bin/activate  # macOS/Linux
 
-### 1️⃣ Clone the repository
+Install dependencies
 
-```bash id="metalclone"
-git clone https://github.com/your-username/metal-rate-tracker.git
-```
-
-### 2️⃣ Navigate to the project directory
-
-```bash id="metalcd"
-cd metal-rate-tracker
-```
-
-### 3️⃣ Install dependencies
-
-```bash id="metalinstall"
 pip install django
-```
 
-### 4️⃣ Run the server
+Run migrations
 
-```bash id="metalrun"
+python manage.py makemigrations
+python manage.py migrate
+
+Create superuser (optional)
+
+python manage.py createsuperuser
+
+Run the server
+
 python manage.py runserver
-```
 
-### 5️⃣ Open in browser
+Open in browser
 
-```id="metalurl"
-http://127.0.0.1:8000/
-```
-
----
-
-## 📸 Screenshot
-
-(Add your project screenshot here)
-
-```id="metalscreenshot"
-![Metal Rate Tracker Screenshot](screenshot.png)
-```
-
----
-
-## 🎯 Future Improvements
-
-* Add graphical visualization of price trends
-* Implement user authentication
-* Integrate live metal price APIs
-* Export price history as CSV or Excel
-
----
-
-## 👨‍💻 Author
-
-**Hirendirran P**
-Software Engineer | Python Django Developer
-
-GitHub: https://github.com/Hirendirrrran
-LinkedIn: https://linkedin.com/in/hirendirran-p/
-
----
+http://127.0.0.1:8000/Trade/home/
