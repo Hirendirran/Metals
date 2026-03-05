@@ -60,32 +60,63 @@ MetalRate-Tracker/
 
 Clone the repository
 
+git clone https://github.com/Hirendirrrran/Metals.git
+## ⚙️ Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
 git clone https://github.com/your-username/MetalRate-Tracker.git
 cd MetalRate-Tracker
+```
 
-Create and activate virtual environment
+### 2. Create and Activate Virtual Environment
 
+```bash
 python -m venv venv
-venv\Scripts\activate   # Windows
-source venv/bin/activate  # macOS/Linux
+```
 
-Install dependencies
+**Windows**
 
+```bash
+venv\Scripts\activate
+```
+
+**macOS / Linux**
+
+```bash
+source venv/bin/activate
+```
+
+### 3. Install Dependencies
+
+```bash
 pip install django
+```
 
-Run migrations
+### 4. Run Database Migrations
 
+```bash
 python manage.py makemigrations
 python manage.py migrate
+```
 
-Create superuser (optional)
+### 5. Create Superuser (Optional)
 
+```bash
 python manage.py createsuperuser
+```
 
-Run the server
+### 6. Run the Development Server
 
+```bash
 python manage.py runserver
+```
 
-Open in browser
+### 7. Open in Browser
+
+```
+http://127.0.0.1:8000/
+```
 
 http://127.0.0.1:8000/Trade/home/
